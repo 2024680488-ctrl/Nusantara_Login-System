@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Record Editing- Nusantara Library</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; padding: 50px; }
+        .edit-box { background: #FFDBE5; padding: 20px; border-radius: 8px; max-width: 400px; margin: auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; }
+        button { width: 100%; padding: 10px; background: #6fbc81; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="edit-box">
+        <h2>Information Update</h2>
+        <form action="/update" method="POST">
+            <input type="hidden" name="id" value="{{ data[0] }}">
+            
+            <label>Name:</label>
+            <input type="text" name="name" value="{{ data[1] }}">
+            
+            <label>Role:</label>
+            <select name="role">
+                <option value="Student" {% if data[2] == 'Student' %}selected{% endif %}>Student</option>
+                <option value="Staff" {% if data[2] == 'Staff' %}selected{% endif %}>Staff</option>
+                <option value="Admin" {% if data[2] == 'Admin' %}selected{% endif %}>Admin</option>
+                <option value="Guest" {% if data[2] == 'Guest' %}selected{% endif %}>Guest</option>
+            </select>
+            
+            <button type="submit">SAVE CHANGES</button>
+        </form>
+        <br>
+        <a href="/">Cancel</a>
+    </div>
+</body>
+</html>

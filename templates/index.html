@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nusantara Library Login</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #eef2f3; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .box { background: #FFDBE5; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 350px; }
+        h2 { color: #b34b81; text-align: center; }
+        select, input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #219150; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Nusantara Library</h2>
+        <form action="/login" method="POST">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <select name="role">
+                <option value="Student">Student</option>
+                <option value="Staff">Staff</option>
+                <option value="Admin">Admin</option>
+                <option value="Guest">Guest</option>
+            </select>
+            <select name="collection">
+                <option value="General">General Collection</option>
+                <option value="Special">Special Collection (Access Restricted)</option>
+            </select>
+            <button type="submit">LOGIN ATTENDANCE</button>
+        </form>
+    </div>
+</body>
+</html>

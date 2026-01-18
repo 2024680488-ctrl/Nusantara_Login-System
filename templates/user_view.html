@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nusantara Library - Welcome</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; text-align: center; padding: 50px; }
+        .card { background: #FFDBE5; padding: 40px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 500px; }
+        .ai-rec { background: #fff3e0; border-left: 5px solid #ff9800; padding: 15px; margin: 20px 0; text-align: left; }
+        .btn { background: #27ae60; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 style="color: #fffaff;">Welcome :D !!!!</h1>
+        <p>Halo <strong>{{ name }}</strong>, you have logged in as <strong>{{ role }}</strong>.</p>
+        <p>Collection Access: <span style="color: #ea6ee3; font-weight: bold;">{{ collection }}</span></p>
+
+  <div class="ai-rec" style="background-color: #f8f9fa; padding: 15px; border-left: 5px solid #4fd26e; margin: 10px 0;">
+    <strong>🤖 AI Recommendation for {{ collection }} Collection:</strong><br>
+    <span>"{{ rec }}"</span>
+</div>
+
+        <br><br>
+        <a href="/" class="btn">Log Out</a>
+    </div>
+</body>
+</html>
