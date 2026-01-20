@@ -3,14 +3,12 @@
 <head>
     <title>Nusantara Library - Dashboard</title>
     <style>
-        /* Main Page Background */
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #ffe4e1; /* Misty Rose Pink */
+            background-color: #ffe4e1; 
             margin: 0; 
             padding: 20px; 
         }
-
         .container { 
             max-width: 1000px; 
             margin: auto; 
@@ -19,19 +17,16 @@
             border-radius: 12px; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
         }
-
-        /* The Admin Badge "Box" you wanted */
         .admin-badge {
-            background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
+            background-color: rgba(255, 255, 255, 0.6);
             display: inline-block;
             padding: 10px 20px;
             border-radius: 50px;
             margin: 10px 0;
-            border: 1px solid #A8B371; /* Matches your green theme */
+            border: 1px solid #A8B371;
             color: #444;
             font-weight: bold;
         }
-
         .ai-box { 
             background: #fff3e0; 
             padding: 15px; 
@@ -40,19 +35,10 @@
             border-radius: 8px; 
             border: 1px solid #ddd;
         }
-
-        /* Table Styling */
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
-        
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        
-        th { 
-            background-color: #83db5a !important; /* Your new Light Green */
-            color: white !important; 
-        }
-
+        th { background-color: #83db5a !important; color: white !important; }
         tr:hover { background-color: #f1f1f1; }
-
         .btn-logout { 
             display: inline-block; 
             margin-top: 20px; 
@@ -66,7 +52,6 @@
 </head>
 
 <body>
-
 <div class="container">
     <div style="text-align: center; margin-bottom: 20px;">
         <img src="{{ url_for('static', filename='admin-banner.png') }}" 
@@ -75,22 +60,22 @@
     </div>
 
     <div style="text-align: center;">
-    <div class="admin-badge">
-        👤 Logged in as: <strong>{{ session.get('user_name', 'Admin') }}</strong> 
-        <span style="font-size: 0.8em; margin-left: 10px; color: #666;">
-            (Rank: {{ session.get('role', 'Staff') }})
-        </span>
+        <div class="admin-badge">
+            👤 Logged in as: <strong>{{ session.get('user_name', 'Admin') }}</strong> 
+            <span style="font-size: 0.8em; margin-left: 10px; color: #666;">
+                (Rank: {{ session.get('role', 'Staff') }})
+            </span>
+        </div>
     </div>
-</div>
 
     <div class="ai-box">
-        <h4>🤖 AI Recommendation for {{collection}} Collection:</h4>
-        <p style="font-style: italic; color: #555;">{{rec}}</p>
+        <h4>🤖 AI Recommendation for {{ collection|default('General') }} Collection:</h4>
+        <p style="font-style: italic; color: #555;">{{ rec|default('No current recommendations.') }}</p>
     </div>
 
     <div style="display: flex; justify-content: center; align-items: center; margin: 30px 0;">
         <div class="card" style="background-color: #b5e6b4; border: 2px solid #28a745; padding: 25px; border-radius: 12px; text-align: center; width: 300px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            <h2 style="color: #28a745; font-size: 36px; margin: 0;">{{ total }}</h2>
+            <h2 style="color: #28a745; font-size: 36px; margin: 0;">{{ total|default(0) }}</h2>
             <p style="color: #555; font-weight: bold; margin: 5px 0 0 0;">Total Logins</p>
         </div>
     </div>
@@ -108,7 +93,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for row in logs %}
+            {% for row in logs|default([]) %}
             <tr>
                 <td>{{ loop.index }}</td>
                 <td>{{ row[1] }}</td>
@@ -126,12 +111,5 @@
 
     <a href="/" class="btn-logout">Logout / Back</a>
 </div>
-
 </body>
 </html>
-
-<body>
-
-<div class="container">
-    <div style="text-align: center; margin-bottom: 20px;">
-        <img src="{{
