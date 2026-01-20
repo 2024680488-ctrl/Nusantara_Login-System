@@ -131,6 +131,11 @@ def update_data():
     conn.close()
     return redirect(url_for('admin_dashboard'))
 
+@app.route('/logout')
+def logout():
+    session.clear()  # Ini memadamkan data nama & koleksi yang disimpan
+    return redirect(url_for('home'))
+
 if __name__ == '__main__':
     init_db()
     # Port 10000 is default for Render

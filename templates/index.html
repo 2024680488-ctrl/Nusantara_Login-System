@@ -9,6 +9,9 @@
         select, input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
         button { width: 100%; padding: 10px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
         button:hover { background: #219150; }
+        
+        /* Gaya tambahan untuk menyembunyikan kotak admin */
+        #adminSection { display: none; background: rgba(255,255,255,0.3); padding: 5px 10px; border-radius: 8px; margin: 5px 0; }
     </style>
 </head>
 <body>
@@ -16,20 +19,39 @@
         <h2>Nusantara Library</h2>
         <form action="/login" method="POST">
             <input type="text" name="name" placeholder="Full Name" required>
-            <select name="role">
+            
+            <select name="role" id="roleSelect" onchange="checkRole()">
                 <option value="Student">Student</option>
                 <option value="Staff">Staff</option>
                 <option value="Admin">Admin</option>
                 <option value="Guest">Guest</option>
             </select>
-            <input type="text" name="admin_id" placeholder="Admin ID (Only for Admin)">
-            <input type="password" name="admin_pass" placeholder="Admin Password (Only for Admin)">
+
+            <div id="adminSection">
+                <input type="text" name="admin_id" placeholder="Admin ID">
+                <input type="password" name="admin_pass" placeholder="Admin Password">
+            </div>
+
             <select name="collection">
                 <option value="General">General Collection</option>
                 <option value="Special">Special Collection (Access Restricted)</option>
             </select>
+            
             <button type="submit">LOGIN ATTENDANCE</button>
         </form>
     </div>
+
+    <script>
+        function checkRole() {
+            var role = document.getElementById("roleSelect").value;
+            var adminSection = document.getElementById("adminSection");
+            // Jika pilih Admin, tunjuk kotak ID/Pass. Jika tidak, sorok.
+            if (role === "Admin") {
+                adminSection.style.display = "block";
+            } else {
+                adminSection.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
