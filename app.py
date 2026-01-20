@@ -38,26 +38,42 @@ def home():
 @app.route('/login', methods=['POST'])
 def login():
     name = request.form['name']
-    session['user_name'] = name 
     role = request.form['role']
     collection = request.form['collection']
-    session['chosen_collection'] = collection  # Add this line to save the choice!
-    time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # 1. Check jika user pilih Admin
+    if role == 'Admin':
+        # Kita buat pop-up atau check simple di sini
+        # Untuk fasa ini, kita guna password yang tetap (hardcoded)
+        admin_id = request.form.get('admin_id') # Kita kena tambah input ini di index.html
+        admin_pass = request.form.get('admin_pass')
+        
+        if admin_id == "admin123" and admin_pass == "password123":
+            session['user_name'] = name
+            session['chosen_collection'] = collection
+            # Simpan data ke database
+            save_to_db(name, role, collection)
+            return redirect(url_for('admin_dashboard'))
+        else:
+            return "Wrong Admin ID or Password! <a href='/'>Try again</a>"
+    
+    # 2. Jika user biasa (Student/Staff/etc)
+    session['user_name'] = name
+    session['chosen_collection'] = collection
+    save_to_db(name, role, collection)
+    
+    rec_book = get_book_recommendation(collection)
+    return render_template('user_view.html', name=name, role=role, rec=rec_book, collection=collection)
 
-    # Simpan data baru
+# Fungsi bantuan supaya kod login nampak kemas
+def save_to_db(name, role, collection):
+    time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     conn = sqlite3.connect('nusantara.db')
     cursor = conn.cursor()
     cursor.execute("INSERT INTO attendance (name, role, collection, timestamp) VALUES (?, ?, ?, ?)",
                    (name, role, collection, time_now))
     conn.commit()
     conn.close()
-
-    # Jika Admin, terus pergi ke dashboard
-    if role == 'Admin':
-        return redirect(url_for('admin_dashboard'))
-    else:
-        rec_book = get_book_recommendation(collection)
-        return render_template('user_view.html', name=name, role=role, rec=rec_book, collection=collection)
 
 @app.route('/dashboard')
 def admin_dashboard():
