@@ -18,25 +18,27 @@
             background-attachment: fixed;
         }
 
-        /* Container Banner Penuh Lebar */
+        /* Container Banner yang lebih besar */
         .banner-wrapper {
             width: 100%;
-            height: auto; /* Biar ketinggian ikut saiz gambar supaya tak penyek */
-            max-height: 200px; /* Hadkan supaya tak terlalu besar */
-            margin-bottom: 30px;
+            height: 250px; /* Tingkatkan ketinggian supaya nampak penuh */
+            margin-bottom: 20px;
             overflow: hidden;
             background-color: #FFDBE5; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .full-banner-img {
-            width: 100%; /* Paksa gambar penuhi lebar skrin */
-            height: auto; /* Kekalkan nisbah asal supaya tak zoom/pecah */
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Kekalkan contain supaya tak terpotong */
             display: block;
-            object-fit: cover; /* Gunakan cover semula tapi dengan height auto untuk kawalan lebih baik */
         }
 
-        /* Gaya Kotak Login (Kekal Kemas) */
+        /* Gaya Kotak Login */
         .box { 
             background: rgba(255, 219, 229, 0.95); 
             padding: 30px; 
@@ -45,6 +47,7 @@
             width: 400px; 
             backdrop-filter: blur(10px); 
             border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-top: 10px; /* Jarak sikit dari banner */
             margin-bottom: 50px;
             text-align: center;
         }
