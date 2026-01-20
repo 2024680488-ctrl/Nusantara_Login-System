@@ -10,14 +10,13 @@
             flex-direction: column; 
             align-items: center; 
             min-height: 100vh;
-            /* Background yang selaras dengan semua page */
             background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
                         url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-attachment: fixed;
         }
         
-        /* Mengawal saiz banner supaya kemas */
+        /* Banner seragam dengan Login & Dashboard */
         .banner-container { 
             width: 100%; 
             height: 180px;
@@ -31,7 +30,7 @@
         .banner-img { 
             width: 100%; 
             height: 100%; 
-            object-fit: contain; /* Mengekalkan kualiti gambar */
+            object-fit: contain; /* Kekalkan kualiti gambar */
             display: block; 
         }
         
@@ -52,7 +51,7 @@
             padding: 15px;
             border-radius: 12px;
             margin-top: 20px;
-            border-left: 5px solid #83db5a;
+            border-left: 5px solid #b34b81; /* Tukar hijau ke Pink Nusantara */
             text-align: left;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
@@ -61,7 +60,7 @@
             display: inline-block;
             margin-top: 25px;
             padding: 12px 30px;
-            background: #27ae60;
+            background: #b34b81; /* Selaraskan butang logout dengan tema */
             color: white;
             text-decoration: none;
             border-radius: 8px;
@@ -70,7 +69,7 @@
         }
 
         .btn:hover {
-            background: #219150;
+            background: #8e3a66;
             transform: translateY(-2px);
         }
     </style>
@@ -78,16 +77,16 @@
 <body>
 
     <div class="banner-container">
-        <img src="{{ url_for('static', filename='user-banner.png') }}" alt="Nusantara Library Banner" class="banner-img">
+        <img src="{{ url_for('static', filename='banner.png') }}" alt="Nusantara Library Banner" class="banner-img">
     </div>
 
     <div class="card">
         <h1 style="color: #b34b81; margin-top: 0;">Welcome :D !!!!</h1>
-        <p style="font-size: 1.1em;">Halo <strong>{{ name }}</strong>, you have logged in as <strong>{{ role }}</strong>.</p>
-        <p>Collection Access: <span style="color: #ea6ee3; font-weight: bold;">{{ collection }}</span></p>
+        <p style="font-size: 1.1em; color: #444;">Halo <strong>{{ name }}</strong>, you have logged in as <strong>{{ role }}</strong>.</p>
+        <p style="color: #555;">Collection Access: <span style="color: #b34b81; font-weight: bold;">{{ collection }}</span></p>
 
         <div class="ai-rec">
-            <strong style="color: #333;">🤖 AI Recommendation for {{ collection }} Collection:</strong><br>
+            <strong style="color: #b34b81;">🤖 AI Recommendation for {{ collection }} Collection:</strong><br>
             <p style="font-style: italic; color: #555; margin-top: 10px;">"{{ rec }}"</p>
         </div>
 

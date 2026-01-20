@@ -5,7 +5,6 @@
     <style>
         body { 
             font-family: 'Segoe UI', sans-serif; 
-            /* Gunakan background blur yang sama supaya konsisten */
             background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
                         url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
@@ -17,7 +16,7 @@
             align-items: center;
         }
 
-        /* Banner lebar penuh yang terkawal */
+        /* Banner seragam dengan Login & Edit */
         .header-banner {
             width: 100%;
             height: 180px; 
@@ -30,13 +29,13 @@
         .header-banner img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Ini rahsia supaya tak pecah/oversized */
+            object-fit: contain; /* Mengelakkan masalah zoom melampau */
         }
 
         .container { 
             max-width: 1000px; 
             width: 95%;
-            background: rgba(255, 219, 229, 0.95); /* Glassmorphism sikit */
+            background: rgba(255, 219, 229, 0.95); 
             padding: 30px; 
             border-radius: 20px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
@@ -50,14 +49,15 @@
             padding: 10px 25px;
             border-radius: 50px;
             margin-bottom: 20px;
-            border: 2px solid #83db5a;
+            border: 2px solid #b34b81; /* Tukar warna hijau ke pink/ungu Nusantara */
             font-weight: bold;
+            color: #b34b81;
         }
 
         .ai-box { 
             background: white !important; 
             padding: 15px; 
-            border-left: 5px solid #83db5a; 
+            border-left: 5px solid #b34b81; 
             margin: 20px 0; 
             border-radius: 8px; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
@@ -65,7 +65,7 @@
 
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 12px; overflow: hidden; }
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
-        th { background-color: #83db5a !important; color: white !important; }
+        th { background-color: #b34b81 !important; color: white !important; } /* Header table pink seragam */
         tr:hover { background-color: #f9f9f9; }
 
         .btn-logout { 
@@ -96,18 +96,18 @@
         </div>
 
         <div class="ai-box">
-            <h4>🤖 AI Recommendation for {{ collection|default('General') }} Collection:</h4>
+            <h4 style="color: #b34b81;">🤖 AI Recommendation for {{ collection|default('General') }} Collection:</h4>
             <p style="font-style: italic; color: #555;">"{{ rec|default('No current recommendations.') }}"</p>
         </div>
 
         <div style="display: flex; justify-content: center; margin: 30px 0;">
-            <div style="background: white; border: 2px solid #83db5a; padding: 20px; border-radius: 15px; text-align: center; min-width: 200px;">
-                <h2 style="color: #27ae60; font-size: 40px; margin: 0;">{{ total|default(0) }}</h2>
+            <div style="background: white; border: 2px solid #b34b81; padding: 20px; border-radius: 15px; text-align: center; min-width: 200px;">
+                <h2 style="color: #b34b81; font-size: 40px; margin: 0;">{{ total|default(0) }}</h2>
                 <p style="color: #777; font-weight: bold; margin: 5px 0 0 0;">Total Logins</p>
             </div>
         </div>
 
-        <h3>Attendance Logs</h3>
+        <h3 style="color: #b34b81;">Attendance Logs</h3>
         <table>
             <thead>
                 <tr>
