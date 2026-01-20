@@ -75,11 +75,13 @@
     </div>
 
     <div style="text-align: center;">
-        <div class="admin-badge">
-            👤 Logged in as: <strong>{{session['user_name']}}</strong> 
-            <span style="font-size: 0.8em; margin-left: 10px; color: #666;">(Rank: {{role}})</span>
-        </div>
+    <div class="admin-badge">
+        👤 Logged in as: <strong>{{ session.get('user_name', 'Admin') }}</strong> 
+        <span style="font-size: 0.8em; margin-left: 10px; color: #666;">
+            (Rank: {{ session.get('role', 'Staff') }})
+        </span>
     </div>
+</div>
 
     <div class="ai-box">
         <h4>🤖 AI Recommendation for {{collection}} Collection:</h4>
