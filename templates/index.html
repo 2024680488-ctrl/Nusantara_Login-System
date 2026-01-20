@@ -11,7 +11,6 @@
             flex-direction: column; 
             align-items: center; 
             min-height: 100vh;
-            /* Background Library yang Blur */
             background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
                         url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
@@ -19,27 +18,37 @@
             background-attachment: fixed;
         }
 
-        /* Banner yang kemas dan tidak pecah */
-        .banner-container {
+        /* Container Banner dengan susunan Flex */
+        .banner-wrapper {
             width: 100%;
-            height: 180px; /* Kunci tinggi banner */
+            height: 180px; 
             background: #FFDBE5; 
-            text-align: center;
-            padding: 0;
-            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between; /* Jarakkan kiri, tengah, kanan */
+            align-items: center;
+            padding: 0 20px; /* Jarak dari tepi skrin */
+            box-sizing: border-box;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
             overflow: hidden;
         }
 
+        /* Gaya untuk imej hiasan tepi */
+        .side-img {
+            height: 140px; /* Lebih kecil sikit dari banner utama */
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Banner utama di tengah */
         .banner-img {
-            width: 100%;
             height: 100%;
-            object-fit: contain; /* Mengekalkan kualiti imej */
-            display: block;
+            max-width: 60%; /* Supaya tak makan ruang hiasan tepi */
+            object-fit: contain;
         }
 
         .box { 
-            background: rgba(255, 219, 229, 0.95); /* Kesan telus yang cantik */
+            background: rgba(255, 219, 229, 0.95); 
             padding: 30px; 
             border-radius: 20px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
@@ -64,8 +73,12 @@
 </head>
 <body>
 
-    <div class="banner-container">
+    <div class="banner-wrapper">
+        <img src="{{ url_for('static', filename='gazebo.png') }}" alt="Gazebo" class="side-img">
+        
         <img src="{{ url_for('static', filename='user-banner.png') }}" alt="Nusantara Library Banner" class="banner-img">
+        
+        <img src="{{ url_for('static', filename='barbie-silhouette.png') }}" alt="Barbie Silhouette" class="side-img">
     </div>
 
     <div class="box">
@@ -120,4 +133,3 @@
     </script>
 </body>
 </html>
-
