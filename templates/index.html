@@ -3,15 +3,13 @@
 <head>
     <title>Nusantara Library Login</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #eef2f3; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .box { background: #FFDBE5; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 350px; }
-        h2 { color: #b34b81; text-align: center; }
-        select, input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        body { font-family: 'Segoe UI', sans-serif; background: #eef2f3; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .box { background: #FFDBE5; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 380px; }
+        h2 { color: #b34b81; text-align: center; margin-bottom: 20px; }
+        select, input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+        button { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.3s; }
         button:hover { background: #219150; }
-        
-        /* Gaya tambahan untuk menyembunyikan kotak admin */
-        #adminSection { display: none; background: rgba(255,255,255,0.3); padding: 5px 10px; border-radius: 8px; margin: 5px 0; }
+        .extra-fields { display: none; background: rgba(255,255,255,0.4); padding: 10px; border-radius: 8px; margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -20,19 +18,27 @@
         <form action="/login" method="POST">
             <input type="text" name="name" placeholder="Full Name" required>
             
-            <select name="role" id="roleSelect" onchange="checkRole()">
+            <select name="role" id="roleSelect" onchange="toggleFields()" required>
                 <option value="Student">Student</option>
                 <option value="Staff">Staff</option>
                 <option value="Admin">Admin</option>
                 <option value="Guest">Guest</option>
             </select>
 
-            <div id="adminSection">
+            <div id="idSection" class="extra-fields" style="display: block;">
+                <input type="text" name="user_id" placeholder="Student/Staff ID">
+            </div>
+
+            <div id="adminSection" class="extra-fields">
                 <input type="text" name="admin_id" placeholder="Admin ID">
                 <input type="password" name="admin_pass" placeholder="Admin Password">
             </div>
 
-            <select name="collection">
+            <div id="guestSection" class="extra-fields">
+                <input type="email" name="email" placeholder="Guest Email Address">
+            </div>
+
+            <select name="collection" required>
                 <option value="General">General Collection</option>
                 <option value="Special">Special Collection (Access Restricted)</option>
             </select>
@@ -42,14 +48,20 @@
     </div>
 
     <script>
-        function checkRole() {
+        function toggleFields() {
             var role = document.getElementById("roleSelect").value;
-            var adminSection = document.getElementById("adminSection");
-            // Jika pilih Admin, tunjuk kotak ID/Pass. Jika tidak, sorok.
-            if (role === "Admin") {
-                adminSection.style.display = "block";
-            } else {
-                adminSection.style.display = "none";
+            // Sorok semua dulu
+            document.getElementById("idSection").style.display = "none";
+            document.getElementById("adminSection").style.display = "none";
+            document.getElementById("guestSection").style.display = "none";
+
+            // Tunjuk berdasarkan pilihan
+            if (role === "Student" || role === "Staff") {
+                document.getElementById("idSection").style.display = "block";
+            } else if (role === "Admin") {
+                document.getElementById("adminSection").style.display = "block";
+            } else if (role === "Guest") {
+                document.getElementById("guestSection").style.display = "block";
             }
         }
     </script>

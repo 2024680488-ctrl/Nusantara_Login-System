@@ -1,20 +1,22 @@
 import random
-from flask import Flask, render_template, request, redirect, url_for, session # Added session
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = 'super-secret-key' # Required for sessions to work
+app.secret_key = 'super-secret-key'
 
-# --- 1. DATABASE SETUP ---
+# --- 1. DATABASE SETUP (Ditambah column 'additional_info') ---
 def init_db():
     conn = sqlite3.connect('nusantara.db')
     cursor = conn.cursor()
+    # Menambah column 'additional_info' untuk simpan ID atau Email
     cursor.execute('''CREATE TABLE IF NOT EXISTS attendance 
                       (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                        name TEXT, 
                        role TEXT, 
                        collection TEXT, 
+                       additional_info TEXT,
                        timestamp TEXT)''')
     conn.commit()
     conn.close()
@@ -41,37 +43,43 @@ def login():
     role = request.form['role']
     collection = request.form['collection']
     
-    # 1. Check jika user pilih Admin
+    # Menentukan maklumat tambahan berdasarkan role
+    info = ""
+    if role == 'Guest':
+        info = request.form.get('email') # Ambil email jika Guest
+    elif role in ['Student', 'Staff']:
+        info = request.form.get('user_id') # Ambil ID jika Student/Staff
+    
     if role == 'Admin':
-        # Kita buat pop-up atau check simple di sini
-        # Untuk fasa ini, kita guna password yang tetap (hardcoded)
-        admin_id = request.form.get('admin_id') # Kita kena tambah input ini di index.html
+        admin_id = request.form.get('admin_id')
         admin_pass = request.form.get('admin_pass')
         
         if admin_id == "admin123" and admin_pass == "password123":
             session['user_name'] = name
             session['chosen_collection'] = collection
-            # Simpan data ke database
-            save_to_db(name, role, collection)
+            save_to_db(name, role, collection, "ADMIN-AUTHORIZED")
             return redirect(url_for('admin_dashboard'))
         else:
             return "Wrong Admin ID or Password! <a href='/'>Try again</a>"
     
-    # 2. Jika user biasa (Student/Staff/etc)
+    # Simpan ke session untuk kegunaan User View
     session['user_name'] = name
     session['chosen_collection'] = collection
-    save_to_db(name, role, collection)
+    
+    # Simpan ke database dengan info tambahan (ID atau Email)
+    save_to_db(name, role, collection, info)
     
     rec_book = get_book_recommendation(collection)
     return render_template('user_view.html', name=name, role=role, rec=rec_book, collection=collection)
 
-# Fungsi bantuan supaya kod login nampak kemas
-def save_to_db(name, role, collection):
+# Fungsi bantuan dengan tambahan parameter 'info'
+def save_to_db(name, role, collection, info):
     time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     conn = sqlite3.connect('nusantara.db')
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO attendance (name, role, collection, timestamp) VALUES (?, ?, ?, ?)",
-                   (name, role, collection, time_now))
+    # SQL INSERT dikemaskini untuk column baru
+    cursor.execute("INSERT INTO attendance (name, role, collection, additional_info, timestamp) VALUES (?, ?, ?, ?, ?)",
+                   (name, role, collection, info, time_now))
     conn.commit()
     conn.close()
 
@@ -85,12 +93,7 @@ def admin_dashboard():
     conn.close()
     
     display_name = session.get('user_name', 'Admin')
-    
-    # FIX: Define the variable by pulling it from the session
-    # If the session is empty, it will default to "General"
     chosen_collection = session.get('chosen_collection', 'General') 
-    
-    # Use the variable to get the right book list
     rec_book = get_book_recommendation(chosen_collection)
     
     return render_template('dashboard.html', 
@@ -133,10 +136,9 @@ def update_data():
 
 @app.route('/logout')
 def logout():
-    session.clear()  # Ini memadamkan data nama & koleksi yang disimpan
+    session.clear() 
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
     init_db()
-    # Port 10000 is default for Render
     app.run(host='0.0.0.0', port=10000)
