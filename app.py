@@ -1,9 +1,10 @@
 import random
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session # Added session
 import sqlite3
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = 'super-secret-key' # Required for sessions to work
 
 # --- 1. DATABASE SETUP ---
 def init_db():
@@ -37,6 +38,7 @@ def home():
 @app.route('/login', methods=['POST'])
 def login():
     name = request.form['name']
+    session['user_name'] = name  # Saves the name from the form into the session
     role = request.form['role']
     collection = request.form['collection']
     time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -65,8 +67,19 @@ def admin_dashboard():
     total_logins = len(all_data)
     conn.close()
     
+    # Retrieve the name from the session. Defaults to "Admin" if not found
+    display_name = session.get('user_name', 'Admin')
+    
     rec_book = get_book_recommendation("Special")
-    return render_template('dashboard.html', name="Admin", role="Admin", rec=rec_book, logs=all_data, total=total_logins, collection="Special")
+    
+    # name=display_name ensures the badge shows your actual login name
+    return render_template('dashboard.html', 
+                           name=display_name, 
+                           role="Admin", 
+                           rec=rec_book, 
+                           logs=all_data, 
+                           total=total_logins, 
+                           collection="Special")
 
 @app.route('/delete/<int:id>')
 def delete_attendance(id):
@@ -100,4 +113,5 @@ def update_data():
 
 if __name__ == '__main__':
     init_db()
+    # Port 10000 is default for Render
     app.run(host='0.0.0.0', port=10000)
