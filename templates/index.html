@@ -18,33 +18,35 @@
             background-attachment: fixed;
         }
 
-        /* Container Banner dengan susunan Flex */
+        /* Container Banner Utama */
         .banner-wrapper {
             width: 100%;
             height: 180px; 
             background: #FFDBE5; 
             display: flex;
-            justify-content: space-between; /* Jarakkan kiri, tengah, kanan */
+            justify-content: space-between; 
             align-items: center;
-            padding: 0 20px; /* Jarak dari tepi skrin */
+            padding: 0; /* Buang padding supaya gambar hiasan rapat ke tepi */
             box-sizing: border-box;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             margin-bottom: 30px;
             overflow: hidden;
         }
 
-        /* Gaya untuk imej hiasan tepi */
+        /* Hiasan Kiri & Kanan yang SAMA TINGGI */
         .side-img {
-            height: 140px; /* Lebih kecil sikit dari banner utama */
+            height: 100%; /* Paksa tinggi ikut container 180px */
             width: auto;
-            object-fit: contain;
+            object-fit: cover; /* Supaya dia penuhkan ruang tanpa penyek */
+            display: block;
         }
 
-        /* Banner utama di tengah */
+        /* Banner Utama di tengah tetap maintain kualiti */
         .banner-img {
             height: 100%;
-            max-width: 60%; /* Supaya tak makan ruang hiasan tepi */
-            object-fit: contain;
+            flex-grow: 1; /* Biar dia ambil ruang yang tinggal kat tengah */
+            object-fit: contain; 
+            display: block;
         }
 
         .box { 
