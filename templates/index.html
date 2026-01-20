@@ -3,57 +3,47 @@
 <head>
     <title>Nusantara Library Login</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            margin: 0; 
-            padding: 0;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            min-height: 100vh;
-            /* Tambah background imej yang blur di sini */
-            background: linear-gradient(rgba(238, 242, 243, 0.7), rgba(238, 242, 243, 0.7)), 
-                        url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
+    body { 
+        font-family: 'Segoe UI', sans-serif; 
+        margin: 0; 
+        padding: 0;
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        min-height: 100vh;
+        /* Background Library yang Blur */
+        background: linear-gradient(rgba(238, 242, 243, 0.6), rgba(238, 242, 243, 0.6)), 
+                    url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
 
-        /* Banner lebar penuh macam Admin */
-        .banner-container {
-            width: 100%;
-            background: #FFDBE5;
-            text-align: center;
-            padding: 0;
-            margin-bottom: 50px; /* Jarak antara banner dan kotak login */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+    .banner-container {
+        width: 100%;
+        background: transparent; /* Buang warna pink di sini */
+        text-align: center;
+        padding: 0;
+        margin-bottom: 30px;
+    }
 
-        .banner-img {
-            width: 100%;
-            max-width: 1200px; /* Hadkan lebar maksimum supaya tak pecah */
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
+    .banner-img {
+        width: 100%; /* Imej akan ikut lebar skrin */
+        height: auto;
+        max-height: 250px; /* Hadkan tinggi supaya tak terlalu besar */
+        object-fit: cover; /* Ini akan potong sikit imej supaya penuh ke tepi */
+        display: block;
+    }
 
-        /* Kotak login nampak sedikit transparent (glassmorphism) */
-        .box { 
-            background: rgba(255, 219, 229, 0.95); 
-            padding: 30px; 
-            border-radius: 15px; 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2); 
-            width: 380px; 
-            backdrop-filter: blur(4px);
-            margin-bottom: 40px;
-        }
-
-        h2 { color: #b34b81; text-align: center; margin-bottom: 20px; }
-        select, input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
-        button { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.3s; }
-        button:hover { background: #219150; transform: translateY(-2px); }
-        .extra-fields { display: none; background: rgba(255,255,255,0.4); padding: 10px; border-radius: 8px; margin-top: 5px; }
-    </style>
+    .box { 
+        background: rgba(255, 219, 229, 0.9); /* Pink cair + telus */
+        padding: 30px; 
+        border-radius: 20px; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+        width: 400px; 
+        backdrop-filter: blur(5px); /* Kesan glassmorphism */
+    }
+</style>
 </head>
 <body>
 
