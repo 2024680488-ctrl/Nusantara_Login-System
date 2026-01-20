@@ -38,9 +38,10 @@ def home():
 @app.route('/login', methods=['POST'])
 def login():
     name = request.form['name']
-    session['user_name'] = name  # Saves the name from the form into the session
+    session['user_name'] = name 
     role = request.form['role']
     collection = request.form['collection']
+    session['chosen_collection'] = collection  # Add this line to save the choice!
     time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # Simpan data baru
@@ -67,19 +68,22 @@ def admin_dashboard():
     total_logins = len(all_data)
     conn.close()
     
-    # Retrieve the name from the session. Defaults to "Admin" if not found
     display_name = session.get('user_name', 'Admin')
     
-    rec_book = get_book_recommendation("Special")
+    # FIX: Define the variable by pulling it from the session
+    # If the session is empty, it will default to "General"
+    chosen_collection = session.get('chosen_collection', 'General') 
     
-    # name=display_name ensures the badge shows your actual login name
+    # Use the variable to get the right book list
+    rec_book = get_book_recommendation(chosen_collection)
+    
     return render_template('dashboard.html', 
                            name=display_name, 
                            role="Admin", 
                            rec=rec_book, 
                            logs=all_data, 
                            total=total_logins, 
-                           collection="Special")
+                           collection=chosen_collection)
 
 @app.route('/delete/<int:id>')
 def delete_attendance(id):
