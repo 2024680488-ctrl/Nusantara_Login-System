@@ -18,20 +18,21 @@
             background-attachment: fixed;
         }
 
-        /* Container untuk satu banner sahaja */
+        /* Container untuk banner tunggal */
         .banner-wrapper {
             width: 100%;
-            height: 180px; 
+            height: 160px; /* Saiz yang lebih seimbang untuk banner panjang */
             margin-bottom: 30px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            background-color: #FFDBE5; 
+            background-color: #FFDBE5; /* Menutup ruang tepi jika skrin terlalu lebar */
         }
 
         .full-banner-img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Memastikan banner penuhi ruang tanpa nampak penyek */
+            /* PENTING: Menggunakan contain supaya tidak zoom melampau */
+            object-fit: contain; 
             display: block;
         }
 
@@ -49,10 +50,42 @@
         }
 
         h2 { color: #b34b81; margin-bottom: 20px; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px; }
-        button:hover { background: #219150; transform: translateY(-2px); }
-        .extra-fields { display: none; background: rgba(255,255,255,0.4); padding: 10px; border-radius: 8px; margin-top: 5px; }
+        
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 8px 0; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 14px; 
+        }
+        
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background: #27ae60; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            margin-top: 15px; 
+            transition: 0.3s; 
+        }
+        
+        button:hover { 
+            background: #219150; 
+            transform: translateY(-2px); 
+        }
+
+        .extra-fields { 
+            display: none; 
+            background: rgba(255,255,255,0.4); 
+            padding: 10px; 
+            border-radius: 8px; 
+            margin-top: 5px; 
+        }
     </style>
 </head>
 <body>
@@ -65,22 +98,32 @@
         <h2>Nusantara Library</h2>
         <form action="/login" method="POST">
             <input type="text" name="name" placeholder="Full Name" required>
+            
             <select name="role" id="roleSelect" onchange="toggleFields()" required>
                 <option value="Student">Student</option>
                 <option value="Staff">Staff</option>
                 <option value="Admin">Admin</option>
                 <option value="Guest">Guest</option>
             </select>
-            <div id="idSection" class="extra-fields" style="display: block;"><input type="text" name="user_id" placeholder="Student/Staff ID"></div>
+
+            <div id="idSection" class="extra-fields" style="display: block;">
+                <input type="text" name="user_id" placeholder="Student/Staff ID">
+            </div>
+
             <div id="adminSection" class="extra-fields">
                 <input type="text" name="admin_id" placeholder="Admin ID">
                 <input type="password" name="admin_pass" placeholder="Admin Password">
             </div>
-            <div id="guestSection" class="extra-fields"><input type="email" name="email" placeholder="Guest Email Address"></div>
+
+            <div id="guestSection" class="extra-fields">
+                <input type="email" name="email" placeholder="Guest Email Address">
+            </div>
+
             <select name="collection" required>
                 <option value="General">General Collection</option>
                 <option value="Special">Special Collection</option>
             </select>
+            
             <button type="submit">LOGIN ATTENDANCE</button>
         </form>
     </div>
@@ -91,9 +134,14 @@
             document.getElementById("idSection").style.display = "none";
             document.getElementById("adminSection").style.display = "none";
             document.getElementById("guestSection").style.display = "none";
-            if (role === "Student" || role === "Staff") document.getElementById("idSection").style.display = "block";
-            else if (role === "Admin") document.getElementById("adminSection").style.display = "block";
-            else if (role === "Guest") document.getElementById("guestSection").style.display = "block";
+
+            if (role === "Student" || role === "Staff") {
+                document.getElementById("idSection").style.display = "block";
+            } else if (role === "Admin") {
+                document.getElementById("adminSection").style.display = "block";
+            } else if (role === "Guest") {
+                document.getElementById("guestSection").style.display = "block";
+            }
         }
     </script>
 </body>
