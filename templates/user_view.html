@@ -3,25 +3,73 @@
 <head>
     <title>Nusantara Library - Welcome</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; text-align: center; padding: 50px; }
-        .card { background: #FFDBE5; padding: 40px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 500px; }
-        .ai-rec { background: #fff3e0; border-left: 5px solid #ff9800; padding: 15px; margin: 20px 0; text-align: left; }
-        .btn { background: #27ae60; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #f0f2f5; 
+            display: flex; 
+            flex-direction: column; /* Menyusun banner di atas kad */
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .banner-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .banner-img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .card { 
+            background: #FFDBE5; 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+            max-width: 500px; 
+            width: 100%;
+            text-align: center; 
+        }
+        .ai-rec { 
+            background: #f8f9fa; 
+            border-left: 5px solid #4fd26e; 
+            padding: 15px; 
+            margin: 20px 0; 
+            text-align: left; 
+        }
+        .btn { 
+            background: #27ae60; 
+            color: #ffffff; 
+            padding: 10px 20px; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #219150; }
     </style>
 </head>
 <body>
+
+    <div class="banner-container">
+        <img src="{{ url_for('static', filename='user-banner.png') }}" alt="Nusantara Library Banner" class="banner-img">
+    </div>
+
     <div class="card">
-        <h1 style="color: #fffaff;">Welcome :D !!!!</h1>
+        <h1 style="color: #b34b81;">Welcome :D !!!!</h1>
         <p>Halo <strong>{{ name }}</strong>, you have logged in as <strong>{{ role }}</strong>.</p>
         <p>Collection Access: <span style="color: #ea6ee3; font-weight: bold;">{{ collection }}</span></p>
 
-  <div class="ai-rec" style="background-color: #f8f9fa; padding: 15px; border-left: 5px solid #4fd26e; margin: 10px 0;">
-    <strong>🤖 AI Recommendation for {{ collection }} Collection:</strong><br>
-    <span>"{{ rec }}"</span>
-</div>
+        <div class="ai-rec">
+            <strong>🤖 AI Recommendation for {{ collection }} Collection:</strong><br>
+            <span style="font-style: italic;">"{{ rec }}"</span>
+        </div>
 
-        <br><br>
-        <a href="/" class="btn">Log Out</a>
+        <br>
+        <a href="/logout" class="btn">Log Out</a>
     </div>
 </body>
 </html>

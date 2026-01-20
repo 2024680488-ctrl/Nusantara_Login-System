@@ -3,7 +3,27 @@
 <head>
     <title>Nusantara Library Login</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #eef2f3; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #eef2f3; 
+            display: flex; 
+            flex-direction: column; /* Menyusun banner dan box secara menegak */
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+        }
+        /* Style untuk banner */
+        .banner-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .banner-img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
         .box { background: #FFDBE5; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 380px; }
         h2 { color: #b34b81; text-align: center; margin-bottom: 20px; }
         select, input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
@@ -13,6 +33,11 @@
     </style>
 </head>
 <body>
+
+    <div class="banner-container">
+        <img src="{{ url_for('static', filename='user-banner.png') }}" alt="Nusantara Library Banner" class="banner-img">
+    </div>
+
     <div class="box">
         <h2>Nusantara Library</h2>
         <form action="/login" method="POST">
@@ -50,12 +75,10 @@
     <script>
         function toggleFields() {
             var role = document.getElementById("roleSelect").value;
-            // Sorok semua dulu
             document.getElementById("idSection").style.display = "none";
             document.getElementById("adminSection").style.display = "none";
             document.getElementById("guestSection").style.display = "none";
 
-            // Tunjuk berdasarkan pilihan
             if (role === "Student" || role === "Staff") {
                 document.getElementById("idSection").style.display = "block";
             } else if (role === "Admin") {
