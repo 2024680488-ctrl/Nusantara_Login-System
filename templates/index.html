@@ -2,64 +2,115 @@
 <html>
 <head>
     <title>Nusantara Library Login</title>
-<style>
-    /* ... (kekalkan gaya body & box anda) ... */
+    <style>
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            padding: 0;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh;
+            background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
+                        url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
-    .banner-wrapper {
-        width: 100%;
-        height: 180px; 
-        background: #FFDBE5; 
-        display: flex;
-        justify-content: center; /* Rapatkan semua ke tengah */
-        align-items: center;
-        padding: 0;
-        box-sizing: border-box;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        margin-bottom: 30px;
-        overflow: hidden;
-    }
+        /* Banner Wrapper yang Merapatkan Semua Gambar */
+        .banner-wrapper {
+            width: 100%;
+            height: 180px; 
+            background: #FFDBE5; 
+            display: flex;
+            justify-content: center; /* Rapatkan ke tengah */
+            align-items: center;
+            padding: 0;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
 
-    /* Gaya umum untuk hiasan tepi */
-    .side-img {
-        height: 100%;
-        width: 250px; /* Kita bagi lebar tetap supaya siluet nampak jelas */
-        object-fit: cover;
-        display: block;
-        flex-shrink: 0; /* Jangan bagi dia mengecil */
-    }
+        /* Hiasan Kiri & Kanan */
+        .side-img {
+            height: 100%;
+            width: 250px; 
+            object-fit: cover;
+            display: block;
+            flex-shrink: 0;
+        }
 
-    /* Fokus pada Gazebo di KIRI */
-    .gazebo-img {
-        object-position: left; 
-    }
+        .gazebo-img { object-position: left; }
+        .barbie-img { object-position: right; }
 
-    /* Fokus pada Barbie di KANAN */
-    .barbie-img {
-        object-position: right; 
-    }
+        .banner-img {
+            height: 100%;
+            width: auto;
+            flex-grow: 1;
+            object-fit: contain; 
+            display: block;
+        }
 
-    /* Banner utama di tengah */
-    .banner-img {
-        height: 100%;
-        width: auto;
-        flex-grow: 1; /* Ambil baki ruang tengah */
-        object-fit: contain; 
-        display: block;
-    }
+        /* MEMBAIKI KOTAK LOGIN YANG HILANG */
+        .box { 
+            background: rgba(255, 219, 229, 0.95); 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            width: 400px; 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 50px;
+            text-align: center;
+        }
 
-    /* ... (kekalkan gaya h2, input, button anda) ... */
-</style>
+        h2 { color: #b34b81; margin-bottom: 20px; }
+        
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 8px 0; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 14px; 
+        }
+        
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background: #27ae60; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            margin-top: 15px; 
+            transition: 0.3s; 
+        }
+        
+        button:hover { 
+            background: #219150; 
+            transform: translateY(-2px); 
+        }
 
+        .extra-fields { 
+            display: none; 
+            background: rgba(255,255,255,0.4); 
+            padding: 10px; 
+            border-radius: 8px; 
+            margin-top: 5px; 
+        }
+    </style>
+</head>
 <body>
+
     <div class="banner-wrapper">
         <img src="{{ url_for('static', filename='gazebo.png') }}" alt="Gazebo" class="side-img gazebo-img">
-        
-        <img src="{{ url_for('static', filename='user-banner.png') }}" alt="Nusantara Library Banner" class="banner-img">
-        
-        <img src="{{ url_for('static', filename='barbie-silhouette.png') }}" alt="Barbie Silhouette" class="side-img barbie-img">
+        <img src="{{ url_for('static', filename='user-banner.png') }}" alt="Banner" class="banner-img">
+        <img src="{{ url_for('static', filename='barbie-silhouette.png') }}" alt="Barbie" class="side-img barbie-img">
     </div>
-
-    </body>
 
     <div class="box">
         <h2>Nusantara Library</h2>
@@ -88,7 +139,7 @@
 
             <select name="collection" required>
                 <option value="General">General Collection</option>
-                <option value="Special">Special Collection (Access Restricted)</option>
+                <option value="Special">Special Collection</option>
             </select>
             
             <button type="submit">LOGIN ATTENDANCE</button>
