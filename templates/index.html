@@ -18,41 +18,49 @@
             background-attachment: fixed;
         }
 
-        /* Banner Wrapper yang Merapatkan Semua Gambar */
+        /* Container Banner Tanpa Gap */
         .banner-wrapper {
             width: 100%;
             height: 180px; 
             background: #FFDBE5; 
             display: flex;
-            justify-content: center; /* Rapatkan ke tengah */
+            justify-content: center;
             align-items: center;
-            padding: 0;
             margin-bottom: 30px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* Hiasan Kiri & Kanan */
-        .side-img {
+        /* Hiasan Kiri (Gazebo) */
+        .gazebo-img {
             height: 100%;
-            width: 250px; 
+            width: 300px;
             object-fit: cover;
-            display: block;
+            object-position: left;
             flex-shrink: 0;
+            display: block;
         }
 
-        .gazebo-img { object-position: left; }
-        .barbie-img { object-position: right; }
-
+        /* Banner Tengah yang Memenuhi Ruang */
         .banner-img {
             height: 100%;
-            width: auto;
-            flex-grow: 1;
-            object-fit: contain; 
+            flex: 1;
+            object-fit: cover; /* Guna cover untuk hilangkan gap pink */
+            display: block;
+            min-width: 0;
+        }
+
+        /* Hiasan Kanan (Barbie) */
+        .barbie-img {
+            height: 100%;
+            width: 300px;
+            object-fit: cover;
+            object-position: right;
+            flex-shrink: 0;
             display: block;
         }
 
-        /* MEMBAIKI KOTAK LOGIN YANG HILANG */
+        /* Gaya Kotak Login yang Kemas */
         .box { 
             background: rgba(255, 219, 229, 0.95); 
             padding: 30px; 
@@ -107,9 +115,9 @@
 <body>
 
     <div class="banner-wrapper">
-        <img src="{{ url_for('static', filename='gazebo.png') }}" alt="Gazebo" class="side-img gazebo-img">
-        <img src="{{ url_for('static', filename='user-banner.png') }}" alt="Banner" class="banner-img">
-        <img src="{{ url_for('static', filename='barbie-silhouette.png') }}" alt="Barbie" class="side-img barbie-img">
+        <img src="{{ url_for('static', filename='gazebo.png') }}" class="gazebo-img" alt="Gazebo">
+        <img src="{{ url_for('static', filename='user-banner.png') }}" class="banner-img" alt="Banner">
+        <img src="{{ url_for('static', filename='barbie-silhouette.png') }}" class="barbie-img" alt="Barbie">
     </div>
 
     <div class="box">
