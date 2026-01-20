@@ -18,8 +18,13 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>Nusantara Library Admin Panel</h1>
+<div style="text-align: center; margin-bottom: 20px;">
+    <img src="{{ url_for('static', filename='admin-banner.png') }}" 
+         alt="Admin Banner" 
+         style="width: 100%; max-width: 900px; height: auto; border-radius: 12px; box-shadow: 0px 4px 12px rgba(0,0,0,0.15);">
+</div>
+
+<h1 style="text-align: center;">Nusantara Library Admin Panel</h1>
     
     <p>Logged in as: <strong>{{name}}</strong> (Rank: {{role}})</p>
 
