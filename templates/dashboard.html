@@ -69,4 +69,67 @@
 
 <div class="container">
     <div style="text-align: center; margin-bottom: 20px;">
+        <img src="{{ url_for('static', filename='admin-banner.png') }}" 
+             alt="Admin Banner" 
+             style="width: 100%; max-width: 900px; height: auto; border-radius: 12px; box-shadow: 0px 4px 12px rgba(0,0,0,0.15);">
+    </div>
+
+    <div style="text-align: center;">
+        <div class="admin-badge">
+            👤 Logged in as: <strong>{{name}}</strong> 
+            <span style="font-size: 0.8em; margin-left: 10px; color: #666;">(Rank: {{role}})</span>
+        </div>
+    </div>
+
+    <div class="ai-box">
+        <h4>🤖 AI Recommendation for {{collection}} Collection:</h4>
+        <p style="font-style: italic; color: #555;">{{rec}}</p>
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: center; margin: 30px 0;">
+        <div class="card" style="background-color: #b5e6b4; border: 2px solid #28a745; padding: 25px; border-radius: 12px; text-align: center; width: 300px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h2 style="color: #28a745; font-size: 36px; margin: 0;">{{ total }}</h2>
+            <p style="color: #555; font-weight: bold; margin: 5px 0 0 0;">Total Logins</p>
+        </div>
+    </div>
+
+    <h3>Attendance Logs</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Role</th>
+                <th>Collection</th>
+                <th>Time In</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in logs %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>
+                    <a href="/edit/{{ row[0] }}" style="color: #2980b9;">Edit</a> | 
+                    <a href="/delete/{{ row[0] }}" style="color: #c0392b;" onclick="return confirm('Confirm delete data?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/" class="btn-logout">Logout / Back</a>
+</div>
+
+</body>
+</html>
+
+<body>
+
+<div class="container">
+    <div style="text-align: center; margin-bottom: 20px;">
         <img src="{{
