@@ -28,13 +28,14 @@
             font-weight: bold;
         }
         .ai-box { 
-            background: #fff3e0; 
-            padding: 15px; 
-            border-left: 5px solid #ff9800; 
-            margin: 20px 0; 
-            border-radius: 8px; 
-            border: 1px solid #ddd;
-        }
+        background: white !important; /* Changed from orange/peach to White */
+        padding: 15px; 
+        border-left: 5px solid #83db5a; /* Changed border to match your green theme */
+        margin: 20px 0; 
+        border-radius: 8px; 
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
         th { background-color: #83db5a !important; color: white !important; }
@@ -59,11 +60,11 @@
              style="width: 100%; max-width: 900px; height: auto; border-radius: 12px; box-shadow: 0px 4px 12px rgba(0,0,0,0.15);">
     </div>
 
-    <div style="text-align: center;">
+  <div style="text-align: center;">
         <div class="admin-badge">
-            👤 Logged in as: <strong>{{ session.get('user_name', 'Admin') }}</strong> 
+            👤 Logged in as: <strong>{{ session.get('name', 'User') }}</strong> 
             <span style="font-size: 0.8em; margin-left: 10px; color: #666;">
-                (Rank: {{ session.get('role', 'Staff') }})
+                (Rank: Admin)
             </span>
         </div>
     </div>
