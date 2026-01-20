@@ -18,38 +18,43 @@
             background-attachment: fixed;
         }
 
-        /* Container Banner Utama */
+        /* Banner Wrapper Merapatkan Semua */
         .banner-wrapper {
             width: 100%;
-            height: 160px; /* Kita kecilkan sikit tinggi supaya lebih elegan */
-            background: #FFDBE5; 
+            height: 180px; 
             display: flex;
             justify-content: center;
             align-items: center;
             margin-bottom: 30px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #FFDBE5; /* Warna pink latar belakang */
         }
 
-        /* Hiasan Kiri & Kanan (Gazebo & Barbie) */
-        .side-img {
+        /* Gazebo di Kiri */
+        .gazebo-img {
             height: 100%;
-            width: 20%; /* Ambil 20% lebar skrin sahaja */
+            width: 250px;
             object-fit: cover;
+            object-position: left;
             flex-shrink: 0;
-            display: block;
         }
 
-        .gazebo-img { object-position: left; }
-        .barbie-img { object-position: right; }
-
-        /* Banner Tengah (Teks Sistem) */
+        /* Banner Tengah - Kekal Tajam & Tak Penyek */
         .banner-img {
             height: 100%;
-            width: 60%; /* Ambil 60% lebar untuk teks tengah */
-            object-fit: contain; /* PENTING: Supaya teks tak penyek/stretch */
-            background: #FFDBE5; /* Pastikan warna background sama untuk tutup gap */
-            display: block;
+            flex: 1; /* Biar dia ambil ruang tengah */
+            object-fit: contain; 
+            background: #FFDBE5;
+        }
+
+        /* Barbie di Kanan (Anjak ke Kanan) */
+        .barbie-img {
+            height: 100%;
+            width: 250px;
+            object-fit: cover;
+            object-position: right;
+            padding-right: 20px; /* ANJAK KE KANAN SIKIT */
+            flex-shrink: 0;
         }
 
         /* Gaya Kotak Login */
@@ -75,11 +80,9 @@
 <body>
 
     <div class="banner-wrapper">
-        <img src="{{ url_for('static', filename='gazebo.png') }}" class="side-img gazebo-img" alt="Gazebo">
-        
-        <img src="{{ url_for('static', filename='user-banner.png') }}" class="banner-img" alt="Banner">
-        
-        <img src="{{ url_for('static', filename='barbie-silhouette.png') }}" class="side-img barbie-img" alt="Barbie">
+        <img src="{{ url_for('static', filename='gazebo.png') }}" class="gazebo-img">
+        <img src="{{ url_for('static', filename='user-banner.png') }}" class="banner-img">
+        <img src="{{ url_for('static', filename='barbie-silhouette.png') }}" class="barbie-img">
     </div>
 
     <div class="box">
